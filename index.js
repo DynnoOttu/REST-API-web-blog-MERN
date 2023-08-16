@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 
-const productRoutes = require("./src/routes/products");
+const authRoutes = require("./src/routes/auth");
+const blogRoutes = require("./src/routes/blog");
 
 app.use(bodyParser.json()); //akan menerima type JSON
 
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/v1/customer", productRoutes);
+app.use("/v1/auth/", authRoutes);
+app.use("/v1/blog/", blogRoutes);
 
 app.listen(4000);
