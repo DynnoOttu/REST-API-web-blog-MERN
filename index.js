@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongose = require("mongoose");
 const multer = require("multer");
+const path = require("path");
 
 const authRoutes = require("./src/routes/auth");
 const blogRoutes = require("./src/routes/blog");
@@ -28,6 +29,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(bodyParser.json()); //akan menerima type JSON
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
