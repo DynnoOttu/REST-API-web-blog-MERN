@@ -54,3 +54,22 @@ exports.getAllBlogPost = (req, res, next) => {
       next(err);
     });
 };
+
+exports.getBlogPostById = (req, res, next) => {
+  const postId = req.params.postId;
+  BlogPost.findById(postId)
+    .then((result) => {
+      if (!result) {
+        const error = new Error("Data not found");
+        error.errorStatus = 404;
+        throw error;
+      }
+      res.status(200).json({
+        message: "Get Data By Id Success",
+        data: result,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
