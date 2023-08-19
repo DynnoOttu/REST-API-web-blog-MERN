@@ -21,5 +21,17 @@ router.post(
 
 router.get("/posts", blogController.getAllBlogPost);
 router.get("/post/:postId", blogController.getBlogPostById);
+router.put(
+  "/post/:postId",
+  [
+    body("title")
+      .isLength({ min: 5 })
+      .withMessage("Title harus lebih dari 5 Huruf"),
+    body("body")
+      .isLength({ min: 5 })
+      .withMessage("Body harus lebih dari 5 huruf"),
+  ],
+  blogController.updateBlogPost
+);
 
 module.exports = router;
